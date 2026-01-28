@@ -720,22 +720,17 @@ export default function NowadaysCaseStudy() {
                     textDecoration: "none",
                   }}
                 >
-                  <div
+                  <Image
+                    src="/images/gv-logo.svg"
+                    alt="GV (Google Ventures)"
+                    width={60}
+                    height={32}
                     style={{
-                      width: "32px",
                       height: "32px",
-                      backgroundColor: colors.primary,
+                      width: "auto",
                       borderRadius: "4px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: colors.white,
-                      fontWeight: 700,
-                      fontSize: "14px",
                     }}
-                  >
-                    GV
-                  </div>
+                  />
                   <span
                     style={{
                       fontWeight: 600,
