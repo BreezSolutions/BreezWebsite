@@ -1,427 +1,353 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Building2,
+  CreditCard,
+  FileText,
+  Settings,
+  CheckCircle,
+  AlertTriangle,
+  Clock,
+} from "lucide-react";
 import { theme } from "@/theme";
 
 const { colors } = theme;
 
-// Platform configurations with brand colors for recognition
-const platforms = [
-  { name: "Brex", color: "#FF5722", icon: "B", angle: 210, distance: 140 },
+const dataSources = [
+  { icon: Building2, label: "Microsoft Dynamics", sublabel: "ERP & GL" },
+  { icon: CreditCard, label: "Brex", sublabel: "Bank Feed" },
+  { icon: FileText, label: "Invoices & Emails", sublabel: "Documents" },
+];
+
+const proposedUpdates = [
   {
-    name: "QuickBooks",
-    color: "#2CA01C",
-    icon: "QB",
-    angle: 250,
-    distance: 120,
+    icon: CheckCircle,
+    color: "#10B981",
+    type: "MATCHED",
+    description: "Invoice #4521 → Payment $2,450",
   },
-  { name: "Stripe", color: "#635BFF", icon: "S", angle: 290, distance: 140 },
-  { name: "Slack", color: "#E01E5A", icon: "S", angle: 330, distance: 120 },
-  { name: "Email", color: "#4285F4", icon: "@", angle: 10, distance: 140 },
-  { name: "ERP", color: "#0078D4", icon: "E", angle: 50, distance: 120 },
+  {
+    icon: CheckCircle,
+    color: "#10B981",
+    type: "RECONCILED",
+    description: "847 transactions matched",
+  },
+  {
+    icon: AlertTriangle,
+    color: "#F59E0B",
+    type: "FLAGGED",
+    description: "Duplicate entry in AP",
+  },
+  {
+    icon: Clock,
+    color: "#3B82F6",
+    type: "PENDING REVIEW",
+    description: "JE-2024-0892",
+  },
+  {
+    icon: CheckCircle,
+    color: "#10B981",
+    type: "POSTED",
+    description: "Accrual reversal $12,500",
+  },
+  {
+    icon: AlertTriangle,
+    color: "#F59E0B",
+    type: "EXCEPTION",
+    description: "Missing vendor - escalated",
+  },
 ];
 
-function getPosition(angle: number, distance: number) {
-  const radian = (angle * Math.PI) / 180;
-  return {
-    x: Math.cos(radian) * distance,
-    y: Math.sin(radian) * distance,
-  };
-}
-
-function DataParticle({
-  startX,
-  startY,
-  delay,
-  color,
-}: {
-  startX: number;
-  startY: number;
-  delay: number;
-  color: string;
-}) {
-  return (
-    <motion.div
-      style={{
-        position: "absolute",
-        width: "10px",
-        height: "10px",
-        borderRadius: "50%",
-        backgroundColor: color,
-        boxShadow: `0 0 12px ${color}`,
-        left: "50%",
-        top: "50%",
-        marginLeft: "-5px",
-        marginTop: "-5px",
-        zIndex: 10,
-      }}
-      initial={{
-        x: startX,
-        y: startY,
-        opacity: 0,
-        scale: 0.5,
-      }}
-      animate={{
-        x: [startX, startX * 0.5, 0],
-        y: [startY, startY * 0.5, 0],
-        opacity: [0, 1, 1, 0],
-        scale: [0.5, 1.2, 0.8, 0],
-      }}
-      transition={{
-        duration: 2,
-        delay,
-        repeat: Infinity,
-        repeatDelay: 2,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
-
-function PlatformLogo({
-  name,
-  color,
-  icon,
-  angle,
-  distance,
-  index,
-}: {
-  name: string;
-  color: string;
-  icon: string;
-  angle: number;
-  distance: number;
-  index: number;
-}) {
-  const position = getPosition(angle, distance);
-
-  return (
-    <motion.div
-      style={{
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        marginLeft: "-24px",
-        marginTop: "-24px",
-        zIndex: 20,
-      }}
-      initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
-      animate={{ x: position.x, y: position.y, opacity: 1, scale: 1 }}
-      transition={{
-        duration: 0.6,
-        delay: 0.1 * index,
-        type: "spring",
-        stiffness: 150,
-      }}
-    >
-      <motion.div
-        style={{
-          width: "48px",
-          height: "48px",
-          borderRadius: "50%",
-          backgroundColor: color,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: `0 4px 20px ${color}50`,
-          cursor: "pointer",
-        }}
-        whileHover={{ scale: 1.15 }}
-        animate={{ y: [0, -5, 0] }}
-        transition={{
-          y: {
-            duration: 2.5 + index * 0.2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          },
-        }}
-      >
-        <span
-          style={{
-            color: "#ffffff",
-            fontWeight: 700,
-            fontSize: "14px",
-            userSelect: "none",
-          }}
-        >
-          {icon}
-        </span>
-      </motion.div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: "-24px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          whiteSpace: "nowrap",
-        }}
-      >
-        <span
-          style={{ fontSize: "11px", fontWeight: 500, color: colors.secondary }}
-        >
-          {name}
-        </span>
-      </div>
-    </motion.div>
-  );
-}
-
-function CentralAgent() {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-        zIndex: 30,
-      }}
-    >
-      {/* Outer rings - centered on the 80x80 main circle */}
-      <motion.div
-        style={{
-          position: "absolute",
-          width: "140px",
-          height: "140px",
-          left: "-30px",
-          top: "-30px",
-          borderRadius: "50%",
-          border: `2px solid ${colors.secondary}20`,
-        }}
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <motion.div
-        style={{
-          position: "absolute",
-          width: "100px",
-          height: "100px",
-          left: "-10px",
-          top: "-10px",
-          borderRadius: "50%",
-          border: `2px dashed ${colors.secondary}30`,
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Main circle */}
-      <motion.div
-        style={{
-          width: "80px",
-          height: "80px",
-          borderRadius: "50%",
-          backgroundColor: colors.primary,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: `0 0 40px ${colors.primary}40`,
-        }}
-        animate={{
-          boxShadow: [
-            `0 0 40px ${colors.primary}40`,
-            `0 0 60px ${colors.primary}60`,
-            `0 0 40px ${colors.primary}40`,
-          ],
-        }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg
-          width="36"
-          height="36"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke={colors.white}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      </motion.div>
-
-      {/* Learning indicator */}
-      <motion.div
-        style={{
-          position: "absolute",
-          top: "90px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          backgroundColor: colors.white,
-          padding: "8px 16px",
-          borderRadius: "20px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          border: `1px solid ${colors.secondary}20`,
-        }}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-      >
-        <motion.div
-          style={{
-            width: "8px",
-            height: "8px",
-            borderRadius: "50%",
-            backgroundColor: colors.accent,
-          }}
-          animate={{ scale: [1, 1.4, 1] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        />
-        <span
-          style={{ fontSize: "12px", fontWeight: 600, color: colors.primary }}
-        >
-          Learning
-        </span>
-      </motion.div>
-    </div>
-  );
-}
-
-const NOTIFICATIONS = [
-  "Emails analyzed",
-  "Data synced",
-  "Pattern recognized",
-  "Report generated",
-];
-
-function KnowledgeNotification({
-  startIndex,
-  side,
-  delaySeconds = 0,
-}: {
-  startIndex: number;
-  side: "left" | "right";
-  delaySeconds?: number;
-}) {
-  const [currentIndex, setCurrentIndex] = useState(startIndex);
+export default function IntegrationGraphic() {
+  const [visibleUpdates, setVisibleUpdates] = useState([0, 1, 2]);
 
   useEffect(() => {
-    // Offset the interval start to match the animation delay
-    const timeout = setTimeout(() => {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 2) % NOTIFICATIONS.length);
-      }, 9000);
-      return () => clearInterval(interval);
-    }, delaySeconds * 1000);
-    return () => clearTimeout(timeout);
-  }, [delaySeconds]);
+    const interval = setInterval(() => {
+      setVisibleUpdates((prev) => {
+        return prev.map((i) => (i + 1) % proposedUpdates.length);
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       style={{
-        position: "absolute",
-        [side]: "10px",
-        top: "45%",
-        backgroundColor: "#ffffff",
-        borderRadius: "8px",
-        padding: "12px 16px",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-        border: "1px solid #e5e7eb",
-        zIndex: 40,
-      }}
-      initial={{ opacity: 0, x: side === "right" ? -20 : 20, scale: 0.8 }}
-      animate={{
-        opacity: [0, 1, 1, 0],
-        x: side === "right" ? [-20, 0, 0, 20] : [20, 0, 0, -20],
-        scale: [0.8, 1, 1, 0.8],
-      }}
-      transition={{
-        duration: 3,
-        delay: delaySeconds,
-        repeat: Infinity,
-        repeatDelay: 6,
+        backgroundColor: colors.primary,
+        borderRadius: "20px",
+        padding: "40px 48px",
+        overflow: "hidden",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <div
+      {/* Header */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        style={{
+          textAlign: "center",
+          fontSize: "16px",
+          fontWeight: 500,
+          color: `${colors.white}E6`,
+          marginBottom: "32px",
+        }}
+      >
+        Your data. Our agent. Your control.
+      </motion.p>
+
+      {/* Main 3-column layout */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "160px 1fr 200px",
+          gap: "32px",
+          alignItems: "center",
+        }}
+      >
+        {/* Left: Data Sources */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          {dataSources.map((source, i) => (
+            <motion.div
+              key={source.label}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 + i * 0.1, duration: 0.4 }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "14px 18px",
+                backgroundColor: `${colors.white}0D`,
+                borderRadius: "10px",
+                border: `1px solid ${colors.white}14`,
+              }}
+            >
+              <source.icon
+                size={20}
+                color={`${colors.white}80`}
+                strokeWidth={1.5}
+              />
+              <div>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    color: `${colors.white}F2`,
+                    marginBottom: "2px",
+                  }}
+                >
+                  {source.label}
+                </p>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: `${colors.white}73`,
+                  }}
+                >
+                  {source.sublabel}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Center: Agent */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
           style={{
-            width: "20px",
-            height: "20px",
-            flexShrink: 0,
-            borderRadius: "50%",
-            backgroundColor: "#065F4620",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#065F46"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <div
+            style={{
+              position: "relative",
+              width: "120px",
+              height: "120px",
+            }}
           >
-            <path d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <span
+            {/* Outer pulsing ring */}
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.4, 0, 0.4],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              style={{
+                position: "absolute",
+                inset: -12,
+                borderRadius: "50%",
+                border: `2px solid ${colors.accent}`,
+              }}
+            />
+
+            {/* Main circle */}
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "50%",
+                backgroundColor: `${colors.accent}26`,
+                border: `2px solid ${colors.accent}99`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/* Rotating gear */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                <Settings size={36} color={colors.accent} strokeWidth={1.5} />
+              </motion.div>
+            </div>
+          </div>
+
+          <p
+            style={{
+              marginTop: "16px",
+              fontSize: "14px",
+              fontWeight: 600,
+              color: colors.white,
+            }}
+          >
+            Breez Agent
+          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              marginTop: "4px",
+            }}
+          >
+            <motion.div
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                backgroundColor: colors.accent,
+              }}
+            />
+            <span
+              style={{
+                fontSize: "12px",
+                color: colors.accent,
+              }}
+            >
+              Processing
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Right: Output Feed */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.5, duration: 0.4 }}
           style={{
-            fontSize: "12px",
-            fontWeight: 500,
-            color: "#0A0F1F",
+            backgroundColor: `${colors.white}0D`,
+            border: `1px solid ${colors.white}1A`,
+            borderRadius: "12px",
+            padding: "20px",
+            minHeight: "280px",
           }}
         >
-          {NOTIFICATIONS[currentIndex]}
-        </span>
+          {/* Header */}
+          <p
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              color: `${colors.white}80`,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              marginBottom: "12px",
+            }}
+          >
+            Proposed Updates
+          </p>
+          <div
+            style={{
+              height: "1px",
+              backgroundColor: `${colors.white}1A`,
+              marginBottom: "16px",
+            }}
+          />
+
+          {/* Update items */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <AnimatePresence mode="popLayout">
+              {visibleUpdates.map((updateIndex, i) => {
+                const update = proposedUpdates[updateIndex];
+                return (
+                  <motion.div
+                    key={`${updateIndex}-${i}`}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, delay: i * 0.15 }}
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                    }}
+                  >
+                    <update.icon
+                      size={16}
+                      color={update.color}
+                      strokeWidth={2}
+                      style={{ marginTop: "2px", flexShrink: 0 }}
+                    />
+                    <div>
+                      <p
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: 600,
+                          color: update.color,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.05em",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {update.type}
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          color: `${colors.white}D9`,
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {update.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
-  );
-}
-
-export default function IntegrationGraphic() {
-  return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "400px",
-        overflow: "visible",
-      }}
-    >
-      {/* Background glow */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `radial-gradient(circle at 50% 50%, ${colors.secondary}10 0%, transparent 50%)`,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Platform logos */}
-      {platforms.map((platform, index) => (
-        <PlatformLogo key={platform.name} {...platform} index={index} />
-      ))}
-
-      {/* Data particles */}
-      {platforms.map((platform, index) => {
-        const pos = getPosition(platform.angle, platform.distance);
-        return (
-          <DataParticle
-            key={`particle-${platform.name}`}
-            startX={pos.x}
-            startY={pos.y}
-            delay={index * 0.4 + 1}
-            color={platform.color}
-          />
-        );
-      })}
-
-      {/* Central Agent */}
-      <CentralAgent />
-
-      {/* Notifications - alternate left/right every 4.5 seconds */}
-      <KnowledgeNotification startIndex={0} side="right" delaySeconds={0} />
-      <KnowledgeNotification startIndex={1} side="left" delaySeconds={4.5} />
-    </div>
   );
 }
