@@ -3,6 +3,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import IntegrationGraphic from "@/components/IntegrationGraphic";
+import TrackedLink from "@/components/TrackedLink";
 import { theme } from "@/theme";
 
 const { colors } = theme;
@@ -69,29 +70,14 @@ export default function Home() {
                 marginBottom: "24px",
               }}
             >
-              We imagine a world where accounting workflows don&apos;t live in
-              siloed inboxes, spreadsheets, and tribal knowledge. Where
-              month-end close doesn&apos;t require heroics. Where the system
-              doesn&apos;t just store the books—it continuously runs the
-              workflow: reading the messy inputs, chasing missing context,
-              routing approvals, posting with evidence, and escalating only the
-              true exceptions.
-            </p>
-
-            <p
-              style={{
-                fontSize: "var(--text-md)",
-                color: colors.secondary,
-                lineHeight: 1.8,
-                marginBottom: "24px",
-              }}
-            >
-              What&apos;s missing is data synchronization. Today, humans act as
-              the integration layer, manually inputting, translating and
-              coordinating across disjointed systems. Modern agentic AI can
-              finally do the coordination work: interpret unstructured
-              documents, follow policies, take actions across systems, and leave
-              an audit trail that a human (and an auditor) can trust.
+              Today, finance teams waste time and money acting as the
+              integration layer between the ERP and the rest of the
+              stack—manually entering data, reconciling inconsistencies, and
+              coordinating work across disconnected systems. Breez Labs builds
+              custom AI agents that can take over that coordination: interpret
+              unstructured documents, apply your policies, execute actions
+              across systems, and produce an audit trail your team—and your
+              auditors—can rely on.
             </p>
           </section>
 
@@ -120,7 +106,7 @@ export default function Home() {
                 marginBottom: "24px",
               }}
             >
-              Breez Labs is not trying to replace the ERP. We&apos;re starting
+              Breez Labs is not trying to rip out your ERP. We&apos;re starting
               by deeply understanding specific Controller workflows—where close
               and AP actually go manual—and then shipping targeted automations
               that plug into the existing stack. Our strategy is simple: learn
@@ -166,8 +152,13 @@ export default function Home() {
             >
               Case Study
             </p>
-            <a
+            <TrackedLink
               href="/case-studies/nowadays"
+              eventName="case_study_link_clicked"
+              eventProperties={{
+                case_study: "nowadays",
+                location: "home_page",
+              }}
               style={{
                 fontSize: "18px",
                 fontWeight: 600,
@@ -178,7 +169,7 @@ export default function Home() {
               }}
             >
               How we helped Nowadays save 96% of reconciliation time →
-            </a>
+            </TrackedLink>
             <p
               style={{
                 fontSize: "15px",
@@ -230,8 +221,13 @@ export default function Home() {
               }}
             >
               {/* Y Combinator */}
-              <a
+              <TrackedLink
                 href="https://www.ycombinator.com"
+                eventName="investor_link_clicked"
+                eventProperties={{
+                  investor: "Y Combinator",
+                  location: "home_page",
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -266,11 +262,16 @@ export default function Home() {
                 >
                   Y Combinator
                 </span>
-              </a>
+              </TrackedLink>
 
               {/* Google Ventures */}
-              <a
+              <TrackedLink
                 href="https://www.gv.com"
+                eventName="investor_link_clicked"
+                eventProperties={{
+                  investor: "Google Ventures",
+                  location: "home_page",
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -300,7 +301,7 @@ export default function Home() {
                 >
                   Google Ventures
                 </span>
-              </a>
+              </TrackedLink>
             </div>
           </section>
 
@@ -331,8 +332,13 @@ export default function Home() {
 
           {/* CTA */}
           <section style={{ textAlign: "center" }}>
-            <a
+            <TrackedLink
               href="https://calendly.com/daniel-breezlabs/intro-call"
+              eventName="cta_clicked"
+              eventProperties={{
+                cta_text: "Talk to us",
+                location: "home_page_footer",
+              }}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -347,7 +353,7 @@ export default function Home() {
               }}
             >
               Talk to us
-            </a>
+            </TrackedLink>
             <p
               style={{
                 fontSize: "14px",

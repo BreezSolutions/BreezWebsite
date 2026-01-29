@@ -2,12 +2,26 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import posthog from "posthog-js";
 import { theme } from "@/theme";
 
 const { colors } = theme;
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleCaseStudyClick = () => {
+    posthog.capture("nav_case_study_clicked", {
+      location: "navbar",
+    });
+  };
+
+  const handleCtaClick = () => {
+    posthog.capture("nav_cta_clicked", {
+      cta_text: "Talk to us",
+      location: "navbar",
+    });
+  };
 
   return (
     <nav
@@ -48,6 +62,7 @@ export default function Navbar() {
         <div className="desktop-only" style={{ display: "flex", alignItems: "center", gap: "24px" }}>
           <a
             href="/case-studies/nowadays"
+            onClick={handleCaseStudyClick}
             style={{
               color: colors.secondary,
               textDecoration: "none",
@@ -61,6 +76,7 @@ export default function Navbar() {
             href="https://calendly.com/daniel-breezlabs/intro-call"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleCtaClick}
             style={{
               backgroundColor: colors.primary,
               color: colors.white,
@@ -111,7 +127,10 @@ export default function Navbar() {
         >
           <a
             href="/case-studies/nowadays"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              handleCaseStudyClick();
+              setMobileMenuOpen(false);
+            }}
             style={{
               color: colors.secondary,
               textDecoration: "none",
@@ -125,7 +144,10 @@ export default function Navbar() {
             href="https://calendly.com/daniel-breezlabs/intro-call"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              handleCtaClick();
+              setMobileMenuOpen(false);
+            }}
             style={{
               backgroundColor: colors.primary,
               color: colors.white,

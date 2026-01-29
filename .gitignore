@@ -1,6 +1,9 @@
 # Dependencies
 node_modules
 
+#Claude
+.claude
+
 # Next.js
 .next
 out
@@ -9,6 +12,7 @@ out
 .vercel
 
 # Environment files
+.env
 .env*.local
 
 # Debug logs

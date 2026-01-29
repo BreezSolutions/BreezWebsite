@@ -9,6 +9,7 @@ import {
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
+import TrackedLink from "@/components/TrackedLink";
 import { theme } from "@/theme";
 
 const { colors } = theme;
@@ -139,8 +140,10 @@ export default function NowadaysCaseStudy() {
               marginBottom: "24px",
             }}
           >
-            <a
+            <TrackedLink
               href="https://nowadays.ai"
+              eventName="external_link_clicked"
+              eventProperties={{ company: "Nowadays", location: "case_study_page" }}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -150,7 +153,7 @@ export default function NowadaysCaseStudy() {
               }}
             >
               Nowadays
-            </a>{" "}
+            </TrackedLink>{" "}
             is an AI-powered event planning agency specializing in corporate
             events and offsites. As an agent for their clients, they handle
             payments on their behalf—processing millions of dollars in
@@ -623,8 +626,10 @@ export default function NowadaysCaseStudy() {
             >
               Let&apos;s discuss how AI agents can help your team.
             </p>
-            <a
+            <TrackedLink
               href="https://calendly.com/daniel-breezlabs/intro-call"
+              eventName="cta_clicked"
+              eventProperties={{ cta_text: "Schedule a Call", location: "case_study_page" }}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -639,7 +644,7 @@ export default function NowadaysCaseStudy() {
               }}
             >
               Schedule a Call
-            </a>
+            </TrackedLink>
 
             {/* Backed By */}
             <div
@@ -670,8 +675,10 @@ export default function NowadaysCaseStudy() {
                 }}
               >
                 {/* Y Combinator */}
-                <a
+                <TrackedLink
                   href="https://www.ycombinator.com"
+                  eventName="investor_link_clicked"
+                  eventProperties={{ investor: "Y Combinator", location: "case_study_page" }}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -706,11 +713,13 @@ export default function NowadaysCaseStudy() {
                   >
                     Y Combinator
                   </span>
-                </a>
+                </TrackedLink>
 
                 {/* Google Ventures */}
-                <a
+                <TrackedLink
                   href="https://www.gv.com"
+                  eventName="investor_link_clicked"
+                  eventProperties={{ investor: "Google Ventures", location: "case_study_page" }}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -740,7 +749,7 @@ export default function NowadaysCaseStudy() {
                   >
                     Google Ventures
                   </span>
-                </a>
+                </TrackedLink>
               </div>
             </div>
           </div>

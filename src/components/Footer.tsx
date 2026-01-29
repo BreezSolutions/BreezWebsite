@@ -1,3 +1,4 @@
+import TrackedLink from "@/components/TrackedLink";
 import { theme } from "@/theme";
 
 const { colors } = theme;
@@ -51,8 +52,10 @@ export default function Footer() {
             alignItems: "center",
           }}
         >
-          <a
+          <TrackedLink
             href="mailto:founders@breezlabs.com"
+            eventName="email_link_clicked"
+            eventProperties={{ email: "founders@breezlabs.com", location: "footer" }}
             style={{
               fontSize: "14px",
               color: colors.secondary,
@@ -60,7 +63,7 @@ export default function Footer() {
             }}
           >
             founders@breezlabs.com
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </footer>
