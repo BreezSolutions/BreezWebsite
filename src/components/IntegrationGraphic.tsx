@@ -1,17 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, DollarSign, Clock } from "lucide-react";
+import { Mail, DollarSign, Clock } from "lucide-react";
 import { theme } from "@/theme";
 
 const { colors } = theme;
 
 const valueProps = [
   {
-    icon: Search,
-    title: "Find Missing Revenue",
+    icon: Mail,
+    title: "We Live in Your Inbox",
     description:
-      "We read your contracts and communications to surface money you're owed — before an invoice even exists.",
+      "We read every email, contract, and confirmation — so we know when you're owed money before you do.",
   },
   {
     icon: DollarSign,

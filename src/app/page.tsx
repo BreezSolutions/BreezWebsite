@@ -55,10 +55,10 @@ export default function Home() {
                 fontWeight: 500,
               }}
             >
-              Accounts receivable for services businesses where billing
-              isn&apos;t simple. We read your contracts and communications to
-              find money you&apos;re owed—then invoice, collect, and reconcile
-              it for you.
+              We live in your inbox. That&apos;s how we know when you&apos;re
+              owed money—before you do. We read every email, contract, and
+              confirmation to figure out what needs to be invoiced, then handle
+              collections end-to-end.
             </p>
           </header>
 
@@ -72,17 +72,15 @@ export default function Home() {
                 marginBottom: "24px",
               }}
             >
-              If you run an agency, event company, consultancy, or any business
-              where what you&apos;re owed depends on contracts, variable fees,
-              and pass-through costs—you know the problem. Billing isn&apos;t as
-              simple as &ldquo;customer bought X, charge $Y.&rdquo; Revenue
-              comes from multiple sources per deal. Amounts depend on terms
-              buried in contracts. And without someone cross-referencing every
-              transaction, charges go unbilled and money quietly disappears.
-              Traditional AR teams can&apos;t help—they start after the invoice
-              exists. Breez starts before. We understand your business
-              context and surface what you&apos;re owed, then handle invoicing,
-              follow-ups, disputes, and reconciliation end-to-end.
+              If you run an agency, event company, consultancy, or any services
+              business—your billing is buried in emails. A client confirms a
+              project. A vendor sends a receipt. A contract specifies a 7% fee.
+              The information that determines what you&apos;re owed is scattered
+              across dozens of threads, and without someone reading every one,
+              charges go unbilled and revenue quietly disappears. Most AR teams
+              start with a spreadsheet of open invoices. We start with your
+              inbox. Because that&apos;s where the real picture of what
+              you&apos;re owed actually lives.
             </p>
           </section>
 
@@ -111,13 +109,12 @@ export default function Home() {
                 marginBottom: "24px",
               }}
             >
-              We plug into your existing systems—your inbox, ERP, and payment
-              platforms—and take ownership of the AR workflow end-to-end. Our
-              team uses AI tooling to understand your contracts and
-              communications, identify when money is owed, generate and send the
-              right invoices, and manage customer follow-ups until you&apos;re
-              paid. Every action is tracked and every payment is reconciled back
-              to your system of record.
+              We get added to your shared inbox and start reading—every client
+              email, every vendor confirmation, every contract attachment. Our
+              team uses AI tooling to piece together what&apos;s owed from the
+              context of your communications, then generates the right invoices,
+              sends them, and manages follow-ups until you&apos;re paid. When
+              payment comes in, we reconcile it back to your system of record.
             </p>
 
             <p
