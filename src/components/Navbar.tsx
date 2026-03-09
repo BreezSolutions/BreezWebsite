@@ -7,18 +7,18 @@ import { theme } from "@/theme";
 
 const { colors } = theme;
 
+const navLinks = [
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Case Study", href: "/case-studies/nowadays" },
+  { label: "About", href: "#about" },
+];
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleCaseStudyClick = () => {
-    posthog.capture("nav_case_study_clicked", {
-      location: "navbar",
-    });
-  };
-
   const handleCtaClick = () => {
     posthog.capture("nav_cta_clicked", {
-      cta_text: "Talk to us",
+      cta_text: "Schedule a Call",
       location: "navbar",
     });
   };
@@ -30,14 +30,15 @@ export default function Navbar() {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: colors.background,
+        backgroundColor: `${colors.background}F2`,
+        backdropFilter: "blur(12px)",
         borderBottom: `1px solid ${colors.secondary}15`,
         zIndex: 50,
       }}
     >
       <div
         style={{
-          maxWidth: "800px",
+          maxWidth: "1100px",
           margin: "0 auto",
           padding: "0 var(--container-padding)",
           height: "64px",
@@ -58,27 +59,32 @@ export default function Navbar() {
           Breez Labs
         </a>
 
-        {/* Desktop CTA */}
-        <div className="desktop-only" style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-          <a
-            href="/case-studies/nowadays"
-            onClick={handleCaseStudyClick}
-            style={{
-              color: colors.secondary,
-              textDecoration: "none",
-              fontSize: "14px",
-              fontWeight: 500,
-            }}
-          >
-            Case Study
-          </a>
+        {/* Desktop Nav */}
+        <div
+          className="desktop-only"
+          style={{ display: "flex", alignItems: "center", gap: "32px" }}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              style={{
+                color: colors.secondary,
+                textDecoration: "none",
+                fontSize: "14px",
+                fontWeight: 500,
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
             href="https://calendly.com/daniel-breezlabs/intro-call"
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleCtaClick}
             style={{
-              backgroundColor: colors.primary,
+              backgroundColor: colors.accent,
               color: colors.white,
               padding: "10px 20px",
               borderRadius: "6px",
@@ -87,7 +93,7 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-            Talk to us
+            Schedule a Call
           </a>
         </div>
 
@@ -125,21 +131,21 @@ export default function Navbar() {
             gap: "12px",
           }}
         >
-          <a
-            href="/case-studies/nowadays"
-            onClick={() => {
-              handleCaseStudyClick();
-              setMobileMenuOpen(false);
-            }}
-            style={{
-              color: colors.secondary,
-              textDecoration: "none",
-              fontSize: "16px",
-              padding: "12px 0",
-            }}
-          >
-            Case Study
-          </a>
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                color: colors.secondary,
+                textDecoration: "none",
+                fontSize: "16px",
+                padding: "12px 0",
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
             href="https://calendly.com/daniel-breezlabs/intro-call"
             target="_blank"
@@ -149,7 +155,7 @@ export default function Navbar() {
               setMobileMenuOpen(false);
             }}
             style={{
-              backgroundColor: colors.primary,
+              backgroundColor: colors.accent,
               color: colors.white,
               padding: "14px 20px",
               borderRadius: "6px",
@@ -159,7 +165,7 @@ export default function Navbar() {
               textAlign: "center",
             }}
           >
-            Talk to us
+            Schedule a Call
           </a>
         </div>
       )}

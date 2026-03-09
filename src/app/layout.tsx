@@ -3,19 +3,19 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.breezlabs.com"),
-  title: "Breez Labs | Accounts Receivable Outsourcing",
-  description: "Accounts receivable for services businesses where billing isn't simple. We read your contracts and communications to find money you're owed — then invoice, collect, and reconcile it for you.",
+  title: "Breez Labs | AI Automation for Business Operations",
+  description: "Custom AI automation built by MIT engineers. We design and deploy AI systems that eliminate manual work across your operations. Backed by Y Combinator and Google Ventures.",
   openGraph: {
-    title: "Breez Labs | Accounts Receivable Outsourcing",
-    description: "Want someone to live in your email and handle all the billing-related stuff? That's us. We read every email, contract, and confirmation to figure out what you're owed — then invoice, collect, and reconcile it for you.",
+    title: "Breez Labs | AI Automation for Business Operations",
+    description: "Custom AI automation built by MIT engineers. We design and deploy AI systems that eliminate manual work across your operations.",
     url: "https://www.breezlabs.com",
     siteName: "Breez Labs",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Breez Labs | Accounts Receivable Outsourcing",
-    description: "Want someone to live in your email and handle all the billing-related stuff? That's us.",
+    title: "Breez Labs | AI Automation for Business Operations",
+    description: "Custom AI automation built by MIT engineers. Backed by YC & GV.",
   },
 };
 
