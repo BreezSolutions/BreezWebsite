@@ -1,35 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Hourglass, CircleAlert, UserPlus, Puzzle } from "lucide-react";
+import { TrendingDown, ShieldAlert, Users, Unplug } from "lucide-react";
 import { theme } from "@/theme";
 
 const { colors } = theme;
 
 const problems = [
   {
-    icon: Hourglass,
-    title: "Hours Lost to Manual Work",
+    icon: TrendingDown,
+    title: "Vague Value",
     description:
-      "Your team spends countless hours on repetitive tasks — data entry, follow-ups, reconciliation — instead of high-value work.",
+      "Pilots that look impressive in demos but never tie to a number anyone on the leadership team cares about.",
   },
   {
-    icon: CircleAlert,
-    title: "Human Error is Expensive",
+    icon: ShieldAlert,
+    title: "Untrusted Data",
     description:
-      "Manual processes lead to missed invoices, duplicate entries, and costly mistakes that compound over time.",
+      "Outputs that sound right but reference the wrong client, the wrong period, or data the team doesn't believe.",
   },
   {
-    icon: UserPlus,
-    title: "Scaling Means More Headcount",
+    icon: Users,
+    title: "Skills Gap",
     description:
-      "As your business grows, the only answer seems to be hiring more people — increasing costs and complexity.",
+      "Account teams struggle to learn the tools and write the prompts needed to get reliable output, so adoption stalls after onboarding.",
   },
   {
-    icon: Puzzle,
-    title: "Generic Software Falls Short",
+    icon: Unplug,
+    title: "Workflow Mismatch",
     description:
-      "Off-the-shelf tools don't understand your unique workflows, industry requirements, or business logic.",
+      "Tools that live in a separate tab nobody opens, instead of inside the systems your account leads already use.",
   },
 ];
 
@@ -65,7 +65,7 @@ export default function Problem() {
             marginBottom: "24px",
           }}
         >
-          Your operations are stuck in the past
+          Why most agency AI bets stall
         </h2>
         <p
           style={{
@@ -75,8 +75,7 @@ export default function Problem() {
             maxWidth: "600px",
           }}
         >
-          Most businesses are buried in repetitive, manual processes that drain
-          productivity and introduce costly errors.
+          Most agency AI pilots die for the same four reasons.
         </p>
 
         <div className="responsive-grid-2">

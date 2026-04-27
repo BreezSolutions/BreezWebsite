@@ -3,19 +3,19 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.breezlabs.com"),
-  title: "Breez Labs | AI Automation for Business Operations",
-  description: "Custom AI automation built by MIT engineers. We design and deploy AI systems that eliminate manual work across your operations. Backed by Y Combinator and Google Ventures.",
+  title: "Breez Labs | AI that lands fast inside your agency",
+  description: "AI for agencies. We find one bottleneck, connect to the data you already trust, and deploy with an embedded engineer who fits your workflow. Backed by Y Combinator and Google Ventures.",
   openGraph: {
-    title: "Breez Labs | AI Automation for Business Operations",
-    description: "Custom AI automation built by MIT engineers. We design and deploy AI systems that eliminate manual work across your operations.",
+    title: "Breez Labs | AI that lands fast inside your agency",
+    description: "AI for agencies. We find one bottleneck, connect to the data you already trust, and deploy with an embedded engineer who fits your workflow. Backed by Y Combinator and Google Ventures.",
     url: "https://www.breezlabs.com",
     siteName: "Breez Labs",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Breez Labs | AI Automation for Business Operations",
-    description: "Custom AI automation built by MIT engineers. Backed by YC & GV.",
+    title: "Breez Labs | AI that lands fast inside your agency",
+    description: "AI for agencies. Find one bottleneck, connect to trusted data, deploy with an embedded engineer. Backed by YC & GV.",
   },
 };
 

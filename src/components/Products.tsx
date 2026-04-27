@@ -6,22 +6,22 @@ const services = [
   {
     title: "Process Automation",
     description:
-      "We build AI agents that handle end-to-end workflows — invoicing, data entry, reconciliation, and reporting — so your team can focus on strategy.",
+      "AI agents that handle the work between systems — client reporting, reconciliation, status follow-ups — so account leads stop being the integration layer.",
   },
   {
     title: "Intelligent Document Processing",
     description:
-      "Extract, classify, and route information from emails, contracts, receipts, and any unstructured data automatically.",
+      "Pull structured data out of briefs, RFPs, contracts, and inbound creative — into the format your team already reviews.",
   },
   {
     title: "Custom AI Integrations",
     description:
-      "Connect your existing tools with AI-powered middleware that makes them work together seamlessly.",
+      "Connect the tools your agency already runs on. We meet your data where it lives instead of standing up a parallel stack.",
   },
   {
     title: "Operational Intelligence",
     description:
-      "Real-time dashboards and alerts that surface insights from your operations, so nothing falls through the cracks.",
+      "Dashboards and alerts that surface margin leaks, at-risk accounts, and overdue work — auditable, with the source of every number visible.",
   },
 ];
 
@@ -58,7 +58,7 @@ export default function Products() {
             marginBottom: "24px",
           }}
         >
-          AI automation, tailored to your business
+          AI that fits the way your agency works
         </h2>
         <p
           style={{
@@ -68,9 +68,10 @@ export default function Products() {
             maxWidth: "600px",
           }}
         >
-          We don&apos;t sell software licenses. We engineer custom AI systems
-          that plug into your existing workflows and start delivering results
-          immediately.
+          We don&apos;t sell software. We pick the one workflow burning the
+          most agency hours, build it into HubSpot or Slack or wherever your
+          team already works, and our engineer stays in your channel until
+          it&apos;s saving you real time.
         </p>
 
         <div className="responsive-grid-4">

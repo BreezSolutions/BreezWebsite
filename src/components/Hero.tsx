@@ -2,6 +2,7 @@
 
 import { theme } from "@/theme";
 import Image from "next/image";
+import IntegrationGraphic from "./IntegrationGraphic";
 
 const { colors } = theme;
 
@@ -34,7 +35,7 @@ export default function Hero() {
                 letterSpacing: "0.05em",
               }}
             >
-              AI Automation Experts
+              AI for agencies
             </p>
 
             <h1
@@ -46,9 +47,9 @@ export default function Hero() {
                 lineHeight: 1.1,
               }}
             >
-              We build AI systems
+              AI that lands fast
               <br />
-              that run your operations
+              inside your agency
             </h1>
 
             <p
@@ -60,9 +61,8 @@ export default function Hero() {
                 lineHeight: 1.6,
               }}
             >
-              Breez Labs designs and deploys custom AI automation for businesses
-              — from back-office workflows to customer-facing processes. Built by
-              engineers, not consultants.
+              An engineer embeds with your team, finds the workflow burning
+              the most hours, and ships it inside the tools you already use.
             </p>
 
             <div
@@ -206,60 +206,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Visual */}
+          {/* Right Visual - Integration Graphic */}
           <div className="desktop-only" style={{ display: "block" }}>
-            <div
-              style={{
-                backgroundColor: colors.primary,
-                borderRadius: "20px",
-                padding: "40px 32px",
-                overflow: "hidden",
-              }}
-            >
-              <p
-                style={{
-                  textAlign: "center",
-                  fontSize: "16px",
-                  fontWeight: 500,
-                  color: `${colors.white}E6`,
-                  marginBottom: "32px",
-                }}
-              >
-                We automate across your entire stack
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, 1fr)",
-                  gap: "16px",
-                }}
-              >
-                {[
-                  "Email & Communications",
-                  "Invoicing & Billing",
-                  "Data Entry & Processing",
-                  "Reporting & Analytics",
-                  "Customer Follow-ups",
-                  "Reconciliation",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    style={{
-                      padding: "16px",
-                      backgroundColor: `${colors.white}0D`,
-                      borderRadius: "10px",
-                      border: `1px solid ${colors.white}14`,
-                      color: `${colors.white}CC`,
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      textAlign: "center",
-                    }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <IntegrationGraphic />
           </div>
         </div>
       </div>

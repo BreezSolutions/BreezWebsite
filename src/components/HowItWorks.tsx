@@ -1,29 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ScanSearch, Cog, Zap } from "lucide-react";
+import { Target, Plug, Users } from "lucide-react";
 import { theme } from "@/theme";
 
 const { colors } = theme;
 
 const steps = [
   {
-    icon: ScanSearch,
-    caption: "Discover",
+    icon: Target,
+    caption: "Find one bottleneck",
     description:
-      "We audit your workflows to find the highest-ROI automation opportunities.",
+      "Our engineer spends a week with your team and picks the single workflow eating the most hours — and the number we'll move. No 30-page audit, no 12-workflow roadmap.",
   },
   {
-    icon: Cog,
-    caption: "Build",
+    icon: Plug,
+    caption: "Connect, don't migrate",
     description:
-      "Our engineers design and deploy custom AI agents tailored to your operations.",
+      "Your data stays in HubSpot, your billing system, your Drive — wherever it already lives. We read from it, we don't move it. That means we're shipping in week two instead of waiting on IT in month three.",
   },
   {
-    icon: Zap,
-    caption: "Deploy",
+    icon: Users,
+    caption: "Deploy embedded",
     description:
-      "Go live in days, not months. We monitor, iterate, and optimize continuously.",
+      "Our engineer ships the first version into the tool your team already opens every day, then stays in your Slack to fix what breaks the week it breaks.",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function HowItWorks() {
               color: colors.primary,
             }}
           >
-            From chaos to clarity
+            How AI actually lands inside an agency
           </h2>
         </motion.div>
 
